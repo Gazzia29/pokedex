@@ -1,5 +1,5 @@
-const $list = document.getElementById("list");
-const $description = document.getElementById("description");
+const list = document.getElementById("list");
+const description = document.getElementById("description");
 
 const api = "https://pokeapi.co/api/v2/pokemon?limit=150";
 
@@ -25,7 +25,7 @@ function emptyList() {
  * Create an item, fetch its data and setup event listener
  */
 function createItem(pokemon) {
-	const $item = document.createElement("li");
+	const item = document.createElement("li");
 	const $name = document.createElement("div");
 	const $thumbnail = document.createElement("img");
 	$name.className = "name";
@@ -35,13 +35,14 @@ function createItem(pokemon) {
 		.then(transformToJson)
 		.then((data) => {
 			$name.innerHTML = data.name;
-			$thumbnail.src = data.sprites.front_default;
-			$item.appendChild($thumbnail);
-			$item.appendChild($name);
-			$list.appendChild($item);
-			$item.addEventListener("click", (e) => {
+			item.appendChild($thumbnail);
+			item.appendChild($name);
+			list.appendChild(item);
+			item.addEventListener("click", (e) => {
 				console.log("coucou");
-				showDescription(data);
+				if (!description.classList.contains("show")) {
+					showDescription(data);
+				}
 			});
 		});
 }
@@ -51,7 +52,6 @@ function createItem(pokemon) {
  */
 function fillList(json) {
 	emptyList();
-	console.log(json.results.length);
 	json.results.forEach(createItem);
 }
 
@@ -60,19 +60,11 @@ function fillList(json) {
  */
 function showDescription(data) {
 	console.log("data :>> ", data);
-	$description.classList.add("show");
-	const $img = $description.querySelectorAll(".content img");
-	$img[0].src = data.sprites.other["official-artwork"].front_default;
-	const $fields = $description.querySelectorAll("dd");
-	$fields.forEach(($dd) => {
-		if ($dd.classList[0] != "types") $dd.innerText = data[$dd.classList[0]];
-		else {
-			$dd.innerText = "";
-			data.types.forEach((type) => {
-				if ($dd.innerText.length != 0) $dd.innerText += ", ";
-				$dd.innerText += type.type.name;
-			});
-		}
+	description.classList.add("show");
+
+	const fields = description.querySelectorAll("dd");
+	fields.forEach((dd) => {
+		// ...
 	});
 }
 
@@ -80,7 +72,7 @@ function showDescription(data) {
  * Hide the description
  */
 function hideDescription() {
-	$description.classList.remove("show");
+	description.classList.remove("show");
 }
 
 // Fetch the API end-point and fill the list

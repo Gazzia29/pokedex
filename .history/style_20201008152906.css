@@ -54,18 +54,4 @@ main {
 
 #description .content {
 	display: flex;
-	grid-gap: 20px;
-}
-
-#description .content img {
-	width: 300px;
-	height: 300px;
-}
-
-#description .content dt {
-	opacity: 0.6;
-	padding: 12px 0 6px;
-}
-#description .content dd {
-	margin-left: 0;
 }

@@ -22,7 +22,8 @@ main {
 	list-style-type: none;
 	grid-gap: 10px;
 	grid-template-columns: repeat(auto-fill, minmax(137px, 1fr));
-	width: 100%;
+	max-width: 50%;
+	width: 50%;
 	margin: 0;
 	padding: 0;
 }
@@ -37,35 +38,12 @@ main {
 	flex-direction: column;
 }
 
-#list li:hover {
-}
+#list li:hover {}
 
 #description {
 	display: none;
-	position: fixed;
-	background-color: rgb(255, 255, 255);
-	border: 3px solid rgb(214, 55, 55);
-	padding: 15px 10px;
 }
 
 #description.show {
 	display: block;
-}
-
-#description .content {
-	display: flex;
-	grid-gap: 20px;
-}
-
-#description .content img {
-	width: 300px;
-	height: 300px;
-}
-
-#description .content dt {
-	opacity: 0.6;
-	padding: 12px 0 6px;
-}
-#description .content dd {
-	margin-left: 0;
 }

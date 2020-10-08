@@ -62,7 +62,6 @@ function showDescription(data) {
 	console.log("data :>> ", data);
 	$description.classList.add("show");
 	const $img = $description.querySelectorAll(".content img");
-	$img[0].src = data.sprites.other["official-artwork"].front_default;
 	const $fields = $description.querySelectorAll("dd");
 	$fields.forEach(($dd) => {
 		if ($dd.classList[0] != "types") $dd.innerText = data[$dd.classList[0]];

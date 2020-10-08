@@ -1,0 +1,11 @@
+#list {
+}
+#list li {
+    cursor: pointer;
+}
+#list li:hover {
+}
+
+#description {
+    display: none;
+}

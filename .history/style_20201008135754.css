@@ -1,0 +1,43 @@
+@font-face {
+	font-family: "ZX spectrum";
+	src: url("./font/zx-spectrum.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: "ZX spectrum";
+	font-size: 9px;
+}
+
+main {
+	display: flex;
+	justify-content: space-around;
+}
+
+#list {
+	display: grid;
+	list-style-type: none;
+	padding: 0;
+	grid-gap: 10px;
+	padding: 40px 25px;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	max-width: 900px;
+	margin: auto;
+}
+
+#list li {
+	cursor: pointer;
+	background-color: #eee8e8;
+	padding: 5px 10px;
+}
+
+#list li:hover {}
+
+#description {
+	display: none;
+}
+
+#description.show {
+	display: block;
+}

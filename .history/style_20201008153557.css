@@ -64,8 +64,4 @@ main {
 
 #description .content dt {
 	opacity: 0.6;
-	padding: 12px 0 6px;
-}
-#description .content dd {
-	margin-left: 0;
 }
