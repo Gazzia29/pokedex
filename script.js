@@ -1,7 +1,7 @@
 const $list = document.getElementById("list");
 const $description = document.getElementById("description");
 
-const api = "https://pokeapi.co/api/v2/pokemon?limit=150";
+const api = "https://pokeapi.co/api/v2/pokemon?limit=50";
 
 /**
  * Try to parse a response as JSON data
@@ -24,26 +24,22 @@ function emptyList() {
 /**
  * Create an item, fetch its data and setup event listener
  */
-function createItem(pokemon) {
+function createItem(data) {
 	const $item = document.createElement("li");
 	const $name = document.createElement("div");
-	const $thumbnail = document.createElement("img");
 	$name.className = "name";
+	const $thumbnail = document.createElement("img");
 	$thumbnail.className = "thumbnail";
 
-	fetch(pokemon.url)
-		.then(transformToJson)
-		.then((data) => {
-			$name.innerHTML = data.name;
-			$thumbnail.src = data.sprites.front_default;
-			$item.appendChild($thumbnail);
-			$item.appendChild($name);
-			$list.appendChild($item);
-			$item.addEventListener("click", (e) => {
-				console.log("coucou");
-				showDescription(data);
-			});
-		});
+	$name.innerHTML = data.name;
+	$thumbnail.src = data.sprites.front_default;
+
+	$item.appendChild($thumbnail);
+	$item.appendChild($name);
+	$list.appendChild($item);
+	$item.addEventListener("click", () => {
+		showDescription(data);
+	});
 }
 
 /**
@@ -52,25 +48,50 @@ function createItem(pokemon) {
 function fillList(json) {
 	emptyList();
 	console.log(json.results.length);
-	json.results.forEach(createItem);
+	var dataList = json.results;
+	Promise.all(
+		dataList.map((item) => {
+			return fetch(item.url).then(transformToJson);
+		})
+	).then((pokemonList) => {
+		pokemonList
+			.sort((a, b) => {
+				return a.id - b.id;
+			})
+			.forEach((pokemon) => {
+				console.log("pokemon :>> ", pokemon);
+				createItem(pokemon);
+			});
+	});
 }
 
 /**
  * Fill and display the description
  */
 function showDescription(data) {
-	console.log("data :>> ", data);
 	$description.classList.add("show");
 	const $img = $description.querySelectorAll(".content img");
-	$img[0].src = data.sprites.other["official-artwork"].front_default;
 	const $fields = $description.querySelectorAll("dd");
+
+	$img[0].src = data.sprites.other["official-artwork"].front_default;
+
+	//pour chaque dédé
 	$fields.forEach(($dd) => {
-		if ($dd.classList[0] != "types") $dd.innerText = data[$dd.classList[0]];
-		else {
+		var classe = $dd.classList[0];
+
+		//si sa class #1 est pas "types"
+		if (classe != "types") {
+			//on définit son texte comme la valeur correspondant à la propriété dans "data" du même nom que la classe
+			$dd.innerText = data[classe];
+		} else {
+			//comme data.types est un objet, on ne peut pas faire pareil, sinon cela affiche une erreur. La méthode est donc différente:
+
 			$dd.innerText = "";
+
+			//on itère data.types pour tous les afficher côte à côte
+
 			data.types.forEach((type) => {
-				if ($dd.innerText.length != 0) $dd.innerText += ", ";
-				$dd.innerText += type.type.name;
+				$dd.innerHTML += `<div class="type ${type.type.name}">${type.type.name}</div>`;
 			});
 		}
 	});

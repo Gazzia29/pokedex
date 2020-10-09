@@ -12,10 +12,6 @@ body {
 	padding: 20px;
 }
 
-main {
-	display: flex;
-	justify-content: space-between;
-}
 
 #list {
 	display: grid;
@@ -29,23 +25,37 @@ main {
 
 #list li {
 	cursor: pointer;
-	background-color: #eee8e8;
+	background-color: #fbfbfb;
 	padding: 5px 10px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	transition: 0.2s ease;
+	border: 1px solid rgb(232, 232, 232);
 }
 
 #list li:hover {
+	filter: brightness(105%);
+	transform: scale(1.2);
+	box-shadow:
+		0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+		0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+		0 12.5px 10px rgba(0, 0, 0, 0.035),
+		0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+		0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+		0 100px 80px rgba(0, 0, 0, 0.07);
 }
 
 #description {
 	display: none;
 	position: fixed;
-	background-color: rgb(255, 255, 255);
-	border: 3px solid rgb(214, 55, 55);
-	padding: 15px 10px;
+	border: 8px solid rgb(214, 55, 55);
+	padding: 25px 30px;
+	top: 20px;
+	box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02), 0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035), 0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05), 0 100px 80px rgba(0, 0, 0, 0.07);
+	border-radius: 16px;
+	background: linear-gradient(to bottom right, white 20%, #ffa7a7);
 }
 
 #description.show {
@@ -63,9 +73,100 @@ main {
 }
 
 #description .content dt {
-	opacity: 0.6;
 	padding: 12px 0 6px;
+	text-transform: uppercase;
+	font-size: 10px;
+	color: #d63737;
 }
+
 #description .content dd {
 	margin-left: 0;
+}
+
+#description .content dd.types {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#description .content dd .type {
+	padding: 5px;
+	border-radius: 3px;
+	color: white;
+	text-shadow: 0 0 2px 1px black;
+}
+
+#description .content dd .type+.type {
+	margin-left: 5px;
+}
+
+#description .content dd .type.bug {
+	background-color: #a6b51e;
+}
+
+#description .content dd .type.dark {
+	background-color: #4a3829;
+}
+
+#description .content dd .type.dragon {
+	background-color: #735bdc;
+}
+
+#description .content dd .type.electric {
+	background-color: #f2b41e;
+}
+
+#description .content dd .type.fairy {
+	background-color: #efadf1;
+}
+
+#description .content dd .type.fighting {
+	background-color: #742a13;
+}
+
+#description .content dd .type.fire {
+	background-color: #e33908;
+}
+
+#description .content dd .type.flying {
+	background-color: #98a7f2;
+}
+
+#description .content dd .type.ghost {
+	background-color: #6463af;
+}
+
+#description .content dd .type.grass {
+	background-color: #6cba2e;
+}
+
+#description .content dd .type.ground {
+	background-color: #d0af54;
+}
+
+#description .content dd .type.ice {
+	background-color: #8ae1f8;
+}
+
+#description .content dd .type.normal {
+	background-color: #c5c0b6;
+}
+
+#description .content dd .type.poison {
+	background-color: #924891;
+}
+
+#description .content dd .type.psychic {
+	background-color: #e64279;
+}
+
+#description .content dd .type.rock {
+	background-color: #a38a41;
+}
+
+#description .content dd .type.steel {
+	background-color: #b3b3c3;
+}
+
+#description .content dd .type.water {
+	background-color: #3688e5;
 }
